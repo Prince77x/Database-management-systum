@@ -51,3 +51,17 @@ Electronic data management depends on various parameters :
 
 
 # file handling by python v/s DBMS and compare parameters
+
+
+| **Parameter**                                        | **File Handling via Python**                                                                                 | **DBMS**                                                                                           |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| **Scalability with respect to amount of data**       | Very difficult to handle insert, update and querying of records                                              | In-built features provide high scalability for a large number of records                           |
+| **Scalability with respect to changes in structure** | Extremely difficult to change the structure of records (e.g., adding/removing attributes)                    | Adding/removing attributes can be done seamlessly using simple SQL queries                         |
+| **Time of execution**                                | In seconds                                                                                                   | In milliseconds                                                                                    |
+| **Persistence**                                      | Data processed using temporary data structures, must be manually updated to the file                         | Data persistence ensured via automatic, system-induced mechanisms                                  |
+| **Robustness**                                       | Ensuring robustness must be done manually                                                                    | Backup, recovery and restore need minimum manual intervention                                      |
+| **Security**                                         | Difficult to implement in Python (security at OS level)                                                      | User-specific access at database level                                                             |
+| **Programmer’s productivity**                        | Most file access operations involve extensive coding to ensure persistence, robustness, and security of data | Standard and simple built-in queries reduce coding effort, thus increasing programmer’s throughput |
+| **Arithmetic operations**                            | Easy to do arithmetic computations                                                                           | Limited set of arithmetic operations available                                                     |
+| **Costs**                                            | Low costs for hardware, software, and human resources                                                        | High costs for hardware, software, and human resources                                             |
+
