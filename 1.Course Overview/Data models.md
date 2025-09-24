@@ -102,9 +102,9 @@ Class Student {
 - **Use:** Fast retrieval if relationships are strictly hierarchical  
 
 **Example:**
-Department
-├─ Employee1
-└─ Employee2
+- Department
+-  ├─ Employee1
+-  └─ Employee2
 
 markdown
 Copy code
