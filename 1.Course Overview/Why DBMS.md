@@ -65,3 +65,12 @@ Electronic data management depends on various parameters :
 | **Arithmetic operations**                            | Easy to do arithmetic computations                                                                           | Limited set of arithmetic operations available                                                     |
 | **Costs**                                            | Low costs for hardware, software, and human resources                                                        | High costs for hardware, software, and human resources                                             |
 
+# Time and efficiency
+ -------------------------------------------------------------------------------------------
+| **File handling via python**                                |**SQL** 
+ 
+ |The effort to emplement the code in python is quit easy      |the effort to install and configure DB is expensive and time consuming
+---------------------------------------------------------------------------------------------
+|in order to process 1gb file it may take few seconds          | In DBMS to process it only take few milliseconds 
+
+
