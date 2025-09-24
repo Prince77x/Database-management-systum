@@ -55,215 +55,130 @@ SELECT Name, Marks FROM Student WHERE Course = 'B.Tech';
    +-------------------+
 
 
+# DBMS Concepts for Revision
+
+## 1. Schema and Instance
+
+### Definition
+- **Schema**: The **overall logical structure** of the database. It defines how data is organized, types of data, and relationships.  
+  - It is **stable** and rarely changes.
+- **Instance**: The **actual data** stored in the database at a particular moment.  
+  - It **changes frequently** as data is updated, inserted, or deleted.
+
+### Example
+Consider a `Student` table:
+
+| Attribute  | Type        |
+|------------|------------|
+| StudentID  | INT        |
+| Name       | VARCHAR(50)|
+| Age        | INT        |
+
+- **Schema**: `Student(StudentID, Name, Age)`  
+- **Instance**: 
+
+| StudentID | Name   | Age |
+|-----------|--------|-----|
+| 101       | Alice  | 20  |
+| 102       | Bob    | 21  |
+
+### Diagram
+Schema: defines structure -> Student(StudentID, Name, Age)
+Instance: actual data -> {101, Alice, 20}, {102, Bob, 21}
+
+pgsql
+Copy code
+
+---
+
+## 2. Types of Schema
+
+### 1. **Internal Schema (Physical Schema)**
+- Describes **how data is physically stored** in storage devices.
+- Concerned with file structures, indexes, and access methods.
+- Example: Data is stored in a B-tree index or a heap file.
+
+### 2. **Conceptual Schema (Logical Schema)**
+- Describes **the logical structure of the entire database**.
+- Includes tables, relationships, constraints, views.
+- Example: Entity-Relationship (ER) diagram.
+
+### 3. **External Schema (View Schema)**
+- Describes **user-specific views** of the database.
+- Each user may have a different view depending on permissions or needs.
+- Example: A student can see only their own grades, not all students’ grades.
+
+### Diagram of Three-Level Architecture
+pgsql
+Copy code
+    External Level
+    ----------------
+    User Views (V1, V2, V3)
+    
+    Conceptual Level
+    ----------------
+    Logical DB Structure (Schema)
+    
+    Internal Level
+    ----------------
+    Physical Storage (Files, Indexes)
+yaml
+Copy code
+
+---
+
+## 3. Data Independence
+
+### 3.1 Physical Data Independence
+- **Definition**: Ability to **change the physical storage** without affecting the conceptual schema or applications.
+- **Example**: Changing a file from heap storage to B-tree indexing does not affect queries or applications.
+
+**Diagram:**
+Applications
+|
+Conceptual Schema
+|
+Physical Storage -> changed without affecting above
+
+markdown
+Copy code
+
+### 3.2 Logical Data Independence
+- **Definition**: Ability to **change the logical structure** without affecting applications or external views.
+- **Example**: Adding a new column `Email` in `Student` table does not affect existing queries that do not use it.
+
+**Diagram:**
+Applications -> unchanged
+|
+Conceptual Schema -> changed (added Email column)
+|
+Physical Storage
+
+yaml
+Copy code
 
-# 📚 Schemas and Instances in DBMS
+---
 
-🔹 1. What is a Schema?
+## 4. Comparison: Physical vs Logical Data Independence
 
-A schema is the overall structure or blueprint of a database.
+| Feature                       | Physical Data Independence         | Logical Data Independence          |
+|--------------------------------|----------------------------------|----------------------------------|
+| Level Affected                  | Internal (physical storage)       | Conceptual (logical schema)      |
+| Application Impact              | None                              | Minimal, depends on views        |
+| Example                         | Change file structure/index       | Add new column or table          |
+| Difficulty                      | Easier to achieve                 | Harder to achieve                |
 
-It defines how the data is organized and how relationships are maintained.
+---
 
-Think of it like a plan of a building → it tells where rooms, doors, windows will be, but not who is living there.
+## 5. Quick Summary
 
-✅ Example (Student Database):
+- **Schema** = structure; **Instance** = data.  
+- **Internal Schema** = physical storage.  
+- **Conceptual Schema** = logical organization.  
+- **External Schema** = user views.  
+- **Physical Data Independence** = change storage without affecting logical structure.  
+- **Logical Data Independence** = change logical schema without affecting applications.
 
-Schema defines:
+---
 
-A Student table with attributes: Roll_No, Name, Course, Marks.
-
-Relationships between Student and Course.
-
-👉 Schema is fixed, it doesn’t change frequently.
-
-🔹 2. What is an Instance?
-
-An instance is the actual content (data) stored in the database at a particular moment.
-
-Think of it like the current state of the building → who is living inside, furniture, etc.
-
-✅ Example (Student Table):
-
-Schema (Structure):
-
-CREATE TABLE Student (
-    Roll_No INT PRIMARY KEY,
-    Name VARCHAR(50),
-    Course VARCHAR(50),
-    Marks INT
-);
-
-
-Instance (Data at a moment):
-
-Roll_No	Name	Course	Marks
-101	Rahul	    B.Tech	 85
-102	Priya	    B.Sc	 90
-103	Aman	    B.Com	 78
-
-👉 If we add or delete rows, instance changes, but schema remains the same.
-
-📌 Types of Schemas in DBMS
-🔹 1. Physical Schema
-
-Defines how data is stored physically in the storage devices (hard disk, SSD, etc.).
-
-It deals with low-level details → files, indexes, blocks, pointers, hashing, compression.
-
-Concerned with efficiency and performance.
-
-✅ Example:
-
-A table Student is stored in a data file named student_data.db.
-
-Index created on Roll_No for faster searching.
-
-Data stored in B+ Tree structure internally.
-
-👉 Users (like students, faculty) don’t see this. Only the DBA (Database Administrator) manages it.
-
-🔹 2. Logical Schema
-
-Defines the structure of the database.
-
-It describes what data is stored and what relationships exist among data.
-
-Independent of physical storage.
-
-Concerned with business requirements, not hardware.
-
-✅ Example:
-CREATE TABLE Student (
-    Roll_No INT PRIMARY KEY,
-    Name VARCHAR(50),
-    Course VARCHAR(50),
-    Marks INT
-);
-
-CREATE TABLE Course (
-    Course_ID INT PRIMARY KEY,
-    Course_Name VARCHAR(50),
-    Duration INT
-);
-
-
-👉 This schema tells us there are 2 tables, and attributes, but not how or where they are stored.
-
-🔹 3. View Schema (External Schema)
-
-Defines what part of the database a user is allowed to see.
-
-Provides different views for different users → ensures security & simplicity.
-
-A single database may have multiple views for different users.
-
-✅ Example:
-
-Suppose in Student table we don’t want to show Marks to all users:
-
-CREATE VIEW StudentInfo AS
-SELECT Roll_No, Name, Course FROM Student;
-
-
-Faculty may see: Name, Marks.
-
-Students may see only: Name, Course.
-
-Admin may see all fields.
-
-👉 Helps in data hiding and security.
-
-🔹 4. Relationship Between Schemas
-       External Level  →  View Schema
-       -------------------------------
-       User Views (restricted access)
-
-       Conceptual Level → Logical Schema
-       -------------------------------
-       Tables, Attributes, Relationships
-
-       Internal Level  → Physical Schema
-       -------------------------------
-       Data files, indexes, storage structures
-
-
-👉 Example:
-
-Physical Schema: Data stored as files with indexes.
-
-Logical Schema: Student table with Roll_No, Name, Course, Marks.
-
-View Schema: Student view with only Name, Course.
-
-🔹 Key Differences Between the Schemas
-Feature	        Physical Schema	     Logical Schema   	             View Schema
-Focus	        Storage details	    Database structure	               User interaction
-Audience	    DBA	Developers,     Designers	End Users
-Visibility	    Hidden from users	Visible to developers	        Visible to specific users
-Change Frequency	Rarely changes	Changes when DB design changes	Changes often (as per user needs)
-
-
-
-📌 Physical Data Independence in DBMS
-🔹 1. What is Data Independence?
-
-Data Independence means the ability to change one level of schema without affecting the higher levels.
-
-It is the main feature of the 3-level architecture (Physical, Logical, View).
-
-There are two types:
-
-Physical Data Independence
-
-Logical Data Independence
-
-🔹 2. What is Physical Data Independence?
-
-Definition: Ability to change the physical schema (storage details) without affecting the logical schema or application programs.
-
-In simple words → if we change how data is stored, users & developers don’t need to change their queries or applications.
-
-🔹 3. Why is it Needed?
-
-Databases are huge and may need optimization (faster access, less memory).
-
-If every small change in storage required developers to rewrite queries → it would be a nightmare.
-
-Physical Data Independence protects developers & users from storage details.
-
-🔹 4. Example
-
-Suppose we have a Student table:
-
-CREATE TABLE Student (
-    Roll_No INT PRIMARY KEY,
-    Name VARCHAR(50),
-    Course VARCHAR(50),
-    Marks INT
-);
-
-
-Current physical storage:
-
-Student records stored in a heap file (unsorted).
-
-Change in physical schema:
-
-DBA decides to store records in a B+ Tree index based on Roll_No for faster searching.
-
-Or DBA compresses the data files to save space.
-
-👉 Even after this change:
-
-SELECT Name, Marks FROM Student WHERE Roll_No = 101;
-
-
-query remains the same.
-
-🔹 5. Advantages
-
-Developers don’t worry about storage details.
-
-Improves database performance without disturbing applications.
-
-Makes the system more flexible and maintainable.
+ 
