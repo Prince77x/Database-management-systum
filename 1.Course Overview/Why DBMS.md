@@ -73,4 +73,3 @@ Electronic data management depends on various parameters :
 ---------------------------------------------------------------------------------------------
 |in order to process 1gb file it may take few seconds          | In DBMS to process it only take few milliseconds 
 
-

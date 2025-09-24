@@ -1,4 +1,4 @@
-# DBMS Data Models – Complete Guide
+# DBMS Data Models
 
 ## 1. What is a Data Model?
 
@@ -105,9 +105,6 @@ Class Student {
 - Department
 -  ├─ Employee1
 -  └─ Employee2
-
-markdown
-Copy code
 
 ---
 

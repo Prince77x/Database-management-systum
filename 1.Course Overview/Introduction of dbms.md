@@ -170,7 +170,7 @@ Copy code
 
 ## 5. Quick Summary
 
-- **Schema** = structure; **Instance** = data.  
+- **Schema** = structure or blueprint of data; **Instance** = data.  
 - **Internal Schema** = physical storage.  
 - **Conceptual Schema** = logical organization.  
 - **External Schema** = user views.  
