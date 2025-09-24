@@ -93,24 +93,23 @@ Copy code
 
 ## 2. Types of Schema
 
-### 1. **Internal Schema (Physical Schema)**
-- Describes **how data is physically stored** in storage devices.
+### 1. **Physical Schema(Internal Schema )**
+- Describes **how data is physically stored** in storage devices(like hdd,ssd ..etc).
 - Concerned with file structures, indexes, and access methods.
 - Example: Data is stored in a B-tree index or a heap file.
 
-### 2. **Conceptual Schema (Logical Schema)**
+### 2. ** Logical Schema (Conceptual Schema)**
 - Describes **the logical structure of the entire database**.
 - Includes tables, relationships, constraints, views.
 - Example: Entity-Relationship (ER) diagram.
 
-### 3. **External Schema (View Schema)**
+### 3. **View Schema(External Schema) **
 - Describes **user-specific views** of the database.
 - Each user may have a different view depending on permissions or needs.
 - Example: A student can see only their own grades, not all students’ grades.
 
 ### Diagram of Three-Level Architecture
-pgsql
-Copy code
+ 
     External Level
     ----------------
     User Views (V1, V2, V3)
@@ -122,8 +121,7 @@ Copy code
     Internal Level
     ----------------
     Physical Storage (Files, Indexes)
-yaml
-Copy code
+ 
 
 ---
 
