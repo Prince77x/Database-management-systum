@@ -16,10 +16,10 @@ DDL (**Data Definition Language**) is a subset of SQL used to **define, modify, 
 ## 🔹 Common DDL Commands
 
 ### 1. CREATE
-Used to **create new database objects** (databases, tables, views, indexes).
+- Used to **create new database objects** (databases, tables, views, indexes).
 
 **Syntax:**
-```sql
+ 
 CREATE DATABASE dbname;
 
 CREATE TABLE tablename (
@@ -28,8 +28,7 @@ CREATE TABLE tablename (
 );
 Example:
 
-sql
-Copy code
+
 -- Create a new database
 CREATE DATABASE UniversityDB;
 
@@ -44,13 +43,11 @@ CREATE TABLE Student (
 -- Create a view
 CREATE VIEW StudentView AS
 SELECT Name, Age FROM Student;
-2. ALTER
-Used to modify the structure of an existing database object.
+2. **ALTER**
+- Used to modify the structure of an existing database object.
 
-Syntax & Examples:
+- Syntax & Examples:
 
-sql
-Copy code
 -- Add a new column
 ALTER TABLE Student ADD COLUMN Address VARCHAR(100);
 
@@ -62,14 +59,12 @@ ALTER TABLE Student DROP COLUMN Email;
 
 -- Rename a table
 ALTER TABLE Student RENAME TO StudentInfo;
-3. DROP
-Used to delete database objects permanently.
+3. **DROp**
+- Used to **delete** database objects permanently.
 ⚠️ Caution: All data and structure are lost permanently.
 
-Syntax & Examples:
+- Syntax & Examples:
 
-sql
-Copy code
 -- Drop a table
 DROP TABLE Student;
 
@@ -78,42 +73,41 @@ DROP DATABASE UniversityDB;
 
 -- Drop a view
 DROP VIEW StudentView;
-4. TRUNCATE
-Used to delete all rows in a table but keeps the table structure.
+4. **TRUNCATE**
+- Used to delete all rows in a table but keeps the table structure.
 
-Faster than DELETE because it resets storage.
+- Faster than DELETE because it resets storage.
 
-Usually cannot be rolled back.
+- Usually cannot be rolled back.
 
-Example:
+- Example:
 
-sql
-Copy code
 TRUNCATE TABLE Student;
-5. RENAME
-Used to rename a database object.
+5. **RENAME**
+- Used to rename a database object.
 
-Example:
+- Example:
 
  
 -- Rename a table
-RENAME TABLE Student TO StudentInfo;
-🔹 Key Points about DDL
-DDL commands affect the schema, not the data.
+- RENAME TABLE Student TO StudentInfo;
+- 🔹 Key Points about DDL
+- DDL commands affect the schema, not the data.
 
-Auto-commit: Most DDL commands are committed automatically.
+- Auto-commit: Most DDL commands are committed automatically.
 
-Cannot rollback (depends on DBMS).
+- Cannot rollback (depends on DBMS).
 
-Used during database design and setup.
+- Used during database design and setup.
 
 🔹 Quick Comparison Table
 Command	Purpose	Example
-CREATE	Create database, table, view, or index	CREATE TABLE Student (...)
-ALTER	Modify database object structure	ALTER TABLE Student ADD COLUMN Email VARCHAR(50)
-DROP	Delete database object permanently	DROP TABLE Student
-TRUNCATE	Delete all rows from a table	TRUNCATE TABLE Student
-RENAME	Rename a database object	RENAME TABLE Student TO StudentInfo
+
+CREATE	  | Create database, table, view, or index	CREATE TABLE Student (...)
+ALTER	  | Modify database object structure	ALTER TABLE Student ADD COLUMN Email VARCHAR(50)
+DROP	  | Delete database object permanently	DROP TABLE Student
+TRUNCATE | 	Delete all rows from a table	TRUNCATE TABLE Student
+RENAME	  | Rename a database object	RENAME TABLE Student TO StudentInfo
 
 ✅ Summary
 - DDL defines and manages schema/structure.
@@ -166,85 +160,137 @@ Where:
    
    SELECT Name FROM Student WHERE Age > 18;
 🔹 DML Commands
-1. INSERT
-Used to add new records into a table.
+1. **INSERT**
+- Used to add new records into a table.
 
 Syntax:
-
  
 INSERT INTO table_name (col1, col2, col3, ...)
 VALUES (val1, val2, val3, ...);
 Example:
-
  
 INSERT INTO Student (StudentID, Name, Age, Email)
 VALUES (101, 'Alice', 20, 'alice@email.com');
-2. UPDATE
-Used to modify existing records in a table.
+2. **UPDATE**
+- Used to modify existing records in a table.
 
 Syntax:
-
  
-UPDATE table_name
+- UPDATE table_name
 SET column1 = value1, column2 = value2, ...
 WHERE condition;
 Example:
 
  
-UPDATE Student
+- UPDATE Student
 SET Age = 21, Email = 'alice21@email.com'
 WHERE StudentID = 101;
 ⚠️ If WHERE is not used, all rows are updated.
 
-3. DELETE
-Used to remove existing records from a table.
+3. **DELETE**
+- Used to remove existing records from a table.
 
 Syntax:
-
  
 DELETE FROM table_name WHERE condition;
 Example:
 
- 
 DELETE FROM Student WHERE StudentID = 101;
 ⚠️ If WHERE is not used, all rows are deleted.
 
-4. SELECT (DQL, but often treated as DML)
-Used to retrieve records from a table.
+4. **SELECT** (DQL, but often treated as DML)
+- Used to retrieve records from a table.
 
 Syntax:
-
  
 SELECT column1, column2
 FROM table_name
 WHERE condition;
 Example:
-
  
 SELECT Name, Age FROM Student WHERE Age > 18;
 🔹 Key Points about DML
-DML works on data inside tables, not the schema.
+- DML works on data inside tables, not the schema.
 
-Requires careful use of WHERE to avoid unwanted changes/deletions.
+- Requires careful use of WHERE to avoid unwanted changes/deletions.
 
-DML operations can be controlled with TCL (COMMIT, ROLLBACK, SAVEPOINT).
+- DML operations can be controlled with TCL (COMMIT, ROLLBACK, SAVEPOINT).
 
-DML is most frequently used by developers and users in day-to-day database operations.
+- DML is most frequently used by developers and users in day-to-day database operations.
 
 🔹 Quick Comparison Table
-Command	Purpose	Example
-INSERT	Add new records	INSERT INTO Student VALUES (101,'Alice',20)
-UPDATE	Modify existing records	UPDATE Student SET Age=21 WHERE StudentID=101
-DELETE	Remove records	DELETE FROM Student WHERE StudentID=101
-SELECT	Retrieve records (query data)	SELECT * FROM Student
+- Command	Purpose	Example
+-- INSERT	Add new records	INSERT INTO Student VALUES (101,'Alice',20)
+-- UPDATE	Modify existing records	UPDATE Student SET Age=21 WHERE StudentID=101
+-- DELETE	Remove records	DELETE FROM Student WHERE StudentID=101
+-- SELECT	Retrieve records (query data)	SELECT * FROM Student
 
 ✅ Summary
-DML = Part of SQL focused on data.
+- DML = Part of SQL focused on data.
 
-Commands: INSERT, UPDATE, DELETE, and SELECT.
+- Commands: INSERT, UPDATE, DELETE, and SELECT.
 
-SQL connects with DML as its sub-language for data operations.
+- SQL connects with DML as its sub-language for data operations.
 
-Unlike DDL, DML changes can be rolled back using TCL commands.
+- Unlike DDL, DML changes can be rolled back using TCL commands.
 
  
+### Two classes of Language 
+
+1. **Pure**= used for providing properties about computational power and optimizational 
+
+     - Relational algebra 
+     - Tuple relational calculus
+    - Domain Relational
+
+2. **Commertial** - used in commertial systums
+    - SQL is most widly used as commertial language
+    
+
+# 📘 Structured Query Language (SQL)
+
+## 🔹 What is SQL?
+- **SQL** = Structured Query Language.  
+- It is the **standard language** for managing and manipulating **relational databases (RDBMS)**.  
+- SQL allows us to:  
+  - Define the database structure (tables, schema)  
+  - Insert, update, delete, and query data  
+  - Control access and transactions  
+
+👉 SQL is a **declarative language** → You tell **what** you want, not **how** to do it.
+
+---
+
+## 🔹 Why SQL?
+- Universal language supported by almost all DBMS (MySQL, PostgreSQL, Oracle, SQL Server, SQLite).  
+- SQL is not a Turing machine equivalent language
+- Simple to learn, yet powerful.  
+- Works with **small apps (SQLite)** to **enterprise-level systems (Oracle, PostgreSQL)**.  
+
+---
+
+## 🔹 Categories of SQL Commands
+SQL is divided into **five main categories**:  
+
+| Category | Full Form | Purpose | Examples |
+|----------|-----------|---------|----------|
+| **DDL** | Data Definition Language | Defines structure of DB objects | `CREATE`, `ALTER`, `DROP`, `TRUNCATE` |
+| **DML** | Data Manipulation Language | Work with the data itself | `INSERT`, `UPDATE`, `DELETE` |
+| **DQL** | Data Query Language | Retrieve data from DB | `SELECT` |
+| **DCL** | Data Control Language | Control permissions/security | `GRANT`, `REVOKE` |
+| **TCL** | Transaction Control Language | Manage transactions | `COMMIT`, `ROLLBACK`, `SAVEPOINT` |
+
+---
+
+## 🔹 Basic Structure of SQL
+### Database Objects
+- **Tables** → Store data in rows and columns.  
+- **Views** → Virtual tables (based on queries).  
+- **Indexes** → Improve search performance.  
+- **Schemas** → Logical grouping of tables & objects.  
+
+### Syntax Rules
+- SQL is **not case-sensitive** (`SELECT` = `select`).  
+- Statements end with a **semicolon (;)**.  
+- Strings are enclosed in `'single quotes'`.  
+- SQL follows **set theory** (operations are on sets of rows).  
