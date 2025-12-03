@@ -16,7 +16,7 @@ Each table contains:
 | Operator Name | Symbol | Purpose |
 |--------------|--------|---------|
 | **Selection** | σ | Selects specific **rows** based on a condition |
-| **Projection** | π | Selects specific **columns** |
+| **Projection** | π | Selects specific **columns** and remove dublicates|
 | **Union** | ∪ | Combines results of two relations (no duplicates) |
 | **Difference** | − | Returns rows present in **one relation but not the other** |
 | **Cartesian Product** | × | Combines every row of two tables |
